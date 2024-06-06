@@ -55,7 +55,7 @@ const sendBundleCustomProvider = async (
       break;
   }
 
-  fetch(url, {
+  return fetch(url, {
     method: "post",
     headers,
     body,
@@ -87,77 +87,76 @@ const sendFlashbots = async (
   );
   console.log("Submitting bundle...");
 
-  sendBundleCustomProvider(
-    "https://builder.gmbit.co/rpc",
-    1,
-    signedTransactions,
-    blockNumber
-  );
-  sendBundleCustomProvider(
-    "https://rpc.beaverbuild.org",
-    1,
-    signedTransactions,
-    blockNumber
-  );
-  // sendBundleCustomProvider('https://api.blocknative.com/v1/auction', 1, signedTransactions, blockNumber, 'blocknative')
-  sendBundleCustomProvider(
-    "https://builder0x69.io",
-    42069,
-    signedTransactions,
-    blockNumber
-  );
-  sendBundleCustomProvider(
-    "https://rsync-builder.xyz",
-    1,
-    signedTransactions,
-    blockNumber
-  );
-  sendBundleCustomProvider(
-    "https://api.securerpc.com/v1",
-    1,
-    signedTransactions,
-    blockNumber
-  );
-  sendBundleCustomProvider(
-    "https://rpc.payload.de",
-    1,
-    signedTransactions,
-    blockNumber
-  );
-  // sendBundleCustomProvider('https://rpc.lightspeedbuilder.info', 1, signedTransactions, blockNumber)
-  sendBundleCustomProvider(
-    "https://buildai.net",
-    1,
-    signedTransactions,
-    blockNumber
-  );
-  sendBundleCustomProvider(
-    "https://eth-builder.com",
-    1,
-    signedTransactions,
-    blockNumber
-  );
-  // sendBundleCustomProvider('https://rpc.nfactorial.xyz', 1, signedTransactions, blockNumber)
-  sendBundleCustomProvider(
-    "https://rpc.titanbuilder.xyz",
-    1,
-    signedTransactions,
-    blockNumber
-  );
-  sendBundleCustomProvider(
-    "https://api.edennetwork.io/v1/bundle",
-    1,
-    signedTransactionsEden,
-    blockNumber,
-    "eden"
-  );
-  sendBundleCustomProvider(
-    "https://relay.flashbots.net",
-    1,
-    signedTransactions,
-    blockNumber,
-    "flashbots"
-  );
+  await Promise.all([
+    sendBundleCustomProvider(
+      "https://builder.gmbit.co/rpc",
+      1,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://rpc.beaverbuild.org",
+      1,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://builder0x69.io",
+      42069,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://rsync-builder.xyz",
+      1,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://api.securerpc.com/v1",
+      1,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://rpc.payload.de",
+      1,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://buildai.net",
+      1,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://eth-builder.com",
+      1,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://rpc.titanbuilder.xyz",
+      1,
+      signedTransactions,
+      blockNumber
+    ),
+    sendBundleCustomProvider(
+      "https://api.edennetwork.io/v1/bundle",
+      1,
+      signedTransactionsEden,
+      blockNumber,
+      "eden"
+    ),
+    sendBundleCustomProvider(
+      "https://relay.flashbots.net",
+      1,
+      signedTransactions,
+      blockNumber,
+      "flashbots"
+    ),
+  ]);
 };
 
 // Returns an ethers.BigNumber not a BNbignumber.js
